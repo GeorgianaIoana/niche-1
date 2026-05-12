@@ -1,20 +1,31 @@
-FROM php:8.4-fpm
+FROM php:8.4-cli-alpine
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
     git \
     curl \
     zip \
     unzip \
     ca-certificates \
     nodejs \
-    npm \
-    && rm -rf /var/lib/apt/lists/*
+    npm
 
 # Install PHP extensions
 RUN docker-php-ext-install \
+    ctype \
+    curl \
+    dom \
+    fileinfo \
+    filter \
+    hash \
+    mbstring \
+    openssl \
+    pcre \
     pdo \
-    pdo_mysql
+    pdo_mysql \
+    session \
+    tokenizer \
+    xml
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -43,7 +54,7 @@ RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions sto
     && chmod -R 775 storage bootstrap/cache
 
 # Expose port
-EXPOSE 8000
+EXPOSE 3000
 
-# Start PHP built-in server
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
+# Start PHP built-in server on port 3000
+CMD ["php", "-S", "0.0.0.0:3000", "-t", "public"]
