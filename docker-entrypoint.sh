@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# Create storage directories (volume overwrites them)
+mkdir -p /app/storage/framework/cache
+mkdir -p /app/storage/framework/sessions
+mkdir -p /app/storage/framework/views
+mkdir -p /app/storage/logs
+chmod -R 775 /app/storage
+
 # Create SQLite database if it doesn't exist
 touch /app/storage/database.sqlite
 
