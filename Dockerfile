@@ -1,31 +1,19 @@
-FROM php:8.4-cli-alpine
+FROM php:8.4-cli
 
 # Install system dependencies
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     git \
     curl \
+    libcurl4-openssl-dev \
     zip \
     unzip \
     ca-certificates \
     nodejs \
-    npm
+    npm \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install \
-    ctype \
-    curl \
-    dom \
-    fileinfo \
-    filter \
-    hash \
-    mbstring \
-    openssl \
-    pcre \
-    pdo \
-    pdo_mysql \
-    session \
-    tokenizer \
-    xml
+RUN docker-php-ext-install pdo pdo_mysql
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
