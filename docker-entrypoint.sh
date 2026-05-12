@@ -2,7 +2,7 @@
 set -e
 
 # Create SQLite database if it doesn't exist
-touch /app/database/database.sqlite
+touch /app/storage/database.sqlite
 
 # Clear file-based caches (don't need database)
 php artisan config:clear
