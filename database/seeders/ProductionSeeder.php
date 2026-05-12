@@ -9,8 +9,8 @@ class ProductionSeeder extends Seeder
 {
     public function run(): void
     {
-        // Categories
-        DB::table('categories')->insert([
+        // Categories (skip if already exist)
+        DB::table('categories')->insertOrIgnore([
             ['id' => 1, 'name' => 'Indie & Alternative', 'slug' => 'indie', 'description' => 'Independent and alternative music from groundbreaking artists.', 'image' => null, 'created_at' => now(), 'updated_at' => now()],
             ['id' => 2, 'name' => 'Post-Punk', 'slug' => 'post-punk', 'description' => 'Modern post-punk and experimental rock sounds.', 'image' => null, 'created_at' => now(), 'updated_at' => now()],
             ['id' => 3, 'name' => 'Electronic', 'slug' => 'electronic', 'description' => 'Ambient, techno, and experimental electronic music.', 'image' => null, 'created_at' => now(), 'updated_at' => now()],
@@ -20,8 +20,8 @@ class ProductionSeeder extends Seeder
             ['id' => 7, 'name' => 'CD', 'slug' => 'cd', 'description' => 'Compact disc releases and reissues.', 'image' => '/images/Sade_50_R9294-7531.webp', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
-        // Products
-        DB::table('products')->insert([
+        // Products (skip if already exist)
+        DB::table('products')->insertOrIgnore([
             ['id' => 1, 'name' => 'viagr aboys', 'artist' => 'Viagra Boys', 'slug' => 'viagra-boys-viagr-aboys', 'description' => 'The Swedish post-punk provocateurs return with their most ambitious and unhinged album yet. Self-released on their own Shrimptech Enterprises label, this is Viagra Boys at their most raw and inventive.', 'details' => 'Rough Trade Album of the Year 2025. Limited pressing on clear vinyl with red splatter. The production is deliberately lo-fi in places, adding to the album\'s anarchic energy.', 'price' => 32.99, 'image' => '/images/products/viagra-boys-viagr-aboys.jpg', 'category_id' => 2, 'year' => '2025', 'label' => 'Shrimptech Enterprises', 'condition' => 'Mint', 'tracklist' => '{"a":["Man Made of Meat","The Cognitive Trade-Off Hypothesis","Punk Rock Loser","Troglodyte"],"b":["ADD","Return to Monke","Blue Oyster Cult","Big Boy"]}', 'in_stock' => 1, 'is_new' => 0, 'stock_quantity' => 5, 'created_at' => now(), 'updated_at' => now()],
             ['id' => 2, 'name' => 'Choke Enough', 'artist' => 'Oklou', 'slug' => 'oklou-choke-enough', 'description' => 'French artist Marylou Mayniel\'s debut album is a stunning work of experimental pop that defies categorization. Ethereal vocals float over intricate electronic production.', 'details' => 'Rough Trade Exclusive pressing on transparent blue vinyl. The album rewards headphone listening - there are layers of detail that reveal themselves over time.', 'price' => 29.99, 'image' => '/images/products/oklou-choke-enough.jpg', 'category_id' => 3, 'year' => '2025', 'label' => 'Because Music / True Panther', 'condition' => 'Mint', 'tracklist' => '{"a":["galore","choke enough","dire","oblivion"],"b":["gross","appartement","Talisman","so much"]}', 'in_stock' => 1, 'is_new' => 0, 'stock_quantity' => 4, 'created_at' => now(), 'updated_at' => now()],
             ['id' => 3, 'name' => 'More', 'artist' => 'Pulp', 'slug' => 'pulp-more', 'description' => 'Pulp\'s first new album in 24 years is a triumphant return. Jarvis Cocker\'s perverse wit is fully intact, now combined with the wisdom that comes from a quarter-century of life experience.', 'details' => 'Gatefold sleeve with printed inner. This is the standard black vinyl edition - the Rough Trade exclusive on gold vinyl sold out immediately.', 'price' => 34.99, 'image' => '/images/products/pulp-more.jpg', 'category_id' => 1, 'year' => '2025', 'label' => 'Rough Trade Records', 'condition' => 'Mint', 'tracklist' => '{"a":["More","Pulp Fiction","Sorted for E\'s & Wizz","New"],"b":["Common People II","Sheffield","Disco 2000 Again","Finale"]}', 'in_stock' => 1, 'is_new' => 0, 'stock_quantity' => 6, 'created_at' => now(), 'updated_at' => now()],
