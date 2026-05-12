@@ -41,8 +41,12 @@ RUN npm run build
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions storage/framework/views \
     && chmod -R 775 storage bootstrap/cache
 
+# Make entrypoint executable
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 # Expose port
 EXPOSE 3000
 
-# Start PHP built-in server on port 3000
-CMD ["php", "-S", "0.0.0.0:3000", "-t", "public"]
+# Run migrations and start server
+CMD ["docker-entrypoint.sh"]
