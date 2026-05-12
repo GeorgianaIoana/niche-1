@@ -1,24 +1,4 @@
 <div>
-    <!-- Header Bar -->
-    <div class="bg-surface-dark text-surface">
-        <div class="container-page py-4 flex items-center justify-between">
-            <a href="{{ route('home') }}" class="font-serif font-bold text-xl">The Curated Archive</a>
-            <nav class="hidden md:flex items-center gap-8 text-sm">
-                <a href="{{ route('collection') }}" class="text-white/70 hover:text-white transition-colors">Vinyl</a>
-                <a href="#" class="text-white/70 hover:text-white transition-colors">New Arrivals</a>
-                <a href="#" class="text-white/70 hover:text-white transition-colors">Our Lists</a>
-            </nav>
-            <div class="flex items-center gap-4">
-                <button class="text-white/70 hover:text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                </button>
-                <livewire:shop.cart.mini-cart />
-            </div>
-        </div>
-    </div>
-
     <!-- Product Detail -->
     <section class="container-page py-16">
         <div class="grid lg:grid-cols-2 gap-16">
