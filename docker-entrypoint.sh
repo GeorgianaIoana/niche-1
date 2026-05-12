@@ -16,8 +16,11 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# Run migrations (fresh to reset bad state)
-php artisan migrate:fresh --force
+# Run migrations
+php artisan migrate --force
+
+# Seed data if products table is empty
+php artisan tinker --execute="exit(DB::table('products')->count() > 0 ? 0 : 1);" || php artisan db:seed --class=ProductionSeeder --force
 
 # Start the server
 exec php -S 0.0.0.0:3000 -t public
