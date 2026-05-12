@@ -152,7 +152,7 @@
                     Get early access to exclusive archival releases and weekly curations<br>
                     directly from our head collectors.
                 </p>
-                <livewire:newsletter.subscribe variant="minimal" />
+                <livewire:newsletter.subscribe />
             </div>
         </div>
     </section>

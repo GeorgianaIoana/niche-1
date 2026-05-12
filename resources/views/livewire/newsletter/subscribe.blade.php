@@ -7,20 +7,20 @@
             <span class="font-medium">Welcome to the Registry.</span>
         </div>
     @else
-        <form wire:submit="subscribe" class="max-w-[512px] mx-auto">
-            <div class="flex items-center border-b border-border">
+        <form wire:submit="subscribe" class="max-w-md mx-auto">
+            <div class="flex items-center gap-3 p-2 bg-surface rounded-xl border border-border focus-within:border-accent/50 transition-colors">
                 <input
                     type="email"
                     wire:model="email"
-                    placeholder="YOUR EMAIL ADDRESS"
-                    class="input-newsletter flex-1"
+                    placeholder="Enter your email"
+                    class="flex-1 bg-transparent px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none"
                     required
                 >
                 <button
                     type="submit"
-                    class="px-8 py-4 font-serif font-bold text-accent text-sm tracking-[1.4px] hover:text-accent-hover transition-colors"
+                    class="px-6 py-3 bg-accent text-surface font-medium text-sm tracking-wide rounded-lg hover:bg-accent-hover transition-colors whitespace-nowrap"
                 >
-                    <span wire:loading.remove wire:target="subscribe">SUBSCRIBE</span>
+                    <span wire:loading.remove wire:target="subscribe">Subscribe</span>
                     <span wire:loading wire:target="subscribe">
                         <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -30,7 +30,7 @@
                 </button>
             </div>
             @error('email')
-                <p class="mt-3 text-sm text-red-600 text-center">{{ $message }}</p>
+                <p class="mt-3 text-sm text-red-500 text-center">{{ $message }}</p>
             @enderror
         </form>
     @endif

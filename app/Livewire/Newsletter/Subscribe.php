@@ -8,12 +8,6 @@ class Subscribe extends Component
 {
     public string $email = '';
     public bool $success = false;
-    public string $variant = 'default'; // 'default' or 'dark'
-
-    public function mount(string $variant = 'default'): void
-    {
-        $this->variant = $variant;
-    }
 
     public function subscribe(): void
     {

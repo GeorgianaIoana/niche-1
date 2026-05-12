@@ -419,28 +419,6 @@
         color: white;
     }
 
-    /* Input */
-    .input-newsletter {
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid #d0c5b5;
-        padding: 17px 0 18px 0;
-        font-family: var(--font-sans);
-        font-size: 14px;
-        text-transform: uppercase;
-        color: var(--color-text-primary);
-        width: 100%;
-    }
-
-    .input-newsletter::placeholder {
-        color: var(--color-text-muted);
-    }
-
-    .input-newsletter:focus {
-        outline: none;
-        border-bottom-color: var(--color-accent);
-    }
-
     /* Form Input */
     .input {
         width: 100%;

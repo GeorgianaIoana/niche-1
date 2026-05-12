@@ -394,7 +394,7 @@
     @endif
 
     <!-- Newsletter Section -->
-    <section class="py-16 md:py-24 bg-[#f5f5f7]">
+    <section class="py-16 md:py-24 bg-surface-alt">
         <div class="container-page">
             <div class="max-w-3xl mx-auto text-center">
                 <!-- Hero Image Area -->
@@ -408,14 +408,14 @@
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                         >
                         <!-- Fallback gradient if image not found -->
-                        <div class="hidden w-full h-96 bg-gradient-to-br from-brand-primary/20 via-brand-secondary/20 to-brand-primary/30 items-center justify-center">
-                            <svg class="w-20 h-20 text-brand-primary/40" fill="currentColor" viewBox="0 0 24 24">
+                        <div class="hidden w-full h-96 bg-gradient-to-br from-accent/20 via-accent-light/20 to-accent/30 items-center justify-center">
+                            <svg class="w-20 h-20 text-accent/40" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
                             </svg>
                         </div>
                     </div>
                     <!-- Bottom fade effect -->
-                    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#f5f5f7] to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-surface-alt to-transparent"></div>
                 </div>
 
                 <!-- Headline -->
@@ -424,28 +424,28 @@
                 </h2>
 
                 <!-- Subtext -->
-                <p class="text-gray-600 mb-8 max-w-lg mx-auto leading-relaxed">
+                <p class="text-text-secondary mb-8 max-w-lg mx-auto leading-relaxed">
                     Stay in the groove with the latest new releases, exclusive vinyl editions, and special offers delivered straight to your inbox.
                 </p>
 
                 <!-- Email Form - Inline pill design -->
-                <form class="relative flex items-center bg-white rounded-full shadow-lg max-w-xl mx-auto mb-4">
+                <form class="relative flex items-center bg-surface rounded-full shadow-lg border border-border max-w-xl mx-auto mb-4">
                     <input
                         type="email"
                         placeholder="name@email.com"
-                        class="flex-1 px-6 py-4 bg-transparent rounded-full text-text-primary placeholder-gray-400 focus:outline-none"
+                        class="flex-1 px-6 py-4 bg-transparent rounded-full text-text-primary placeholder:text-text-muted focus:outline-none"
                         required
                     >
                     <button
                         type="submit"
-                        class="px-6 py-3 m-1.5 bg-text-primary text-white rounded-full font-medium hover:bg-text-primary/90 transition-colors whitespace-nowrap"
+                        class="px-6 py-3 m-1.5 bg-accent text-surface rounded-full font-medium hover:bg-accent-hover transition-colors whitespace-nowrap"
                     >
                         Subscribe Now &rarr;
                     </button>
                 </form>
 
                 <!-- Privacy Disclaimer -->
-                <p class="text-sm text-gray-500 italic">
+                <p class="text-sm text-text-secondary italic">
                     Your information will never be shared with third parties, and you can unsubscribe at any time.
                 </p>
             </div>
