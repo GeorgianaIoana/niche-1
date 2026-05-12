@@ -139,6 +139,9 @@
         </div>
     </section>
 
+    <!-- Curved Loop Brand Tagline -->
+    <x-public.curved-loop />
+
     <!-- New Arrivals Section -->
     @if($featuredProducts->count())
     <section class="py-20 md:py-28 bg-gradient-to-b from-surface to-surface-alt">
@@ -216,46 +219,108 @@
                 <h2 class="text-2xl font-semibold text-text-primary">Browse Categories</h2>
             </div>
 
-            <!-- Bento Grid Layout -->
-            <div class="grid grid-cols-4 grid-rows-2 gap-4 h-[500px]">
-                <!-- CD - Large Left -->
-                <a href="{{ route('collection', ['category' => 'cd']) }}" class="group relative col-span-2 row-span-2 overflow-hidden rounded-xl">
-                    <img src="/images/Sade_50_R9294-7531.webp" alt="CD Collection" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
-                    <div class="absolute bottom-6 left-6">
-                        <span class="inline-block px-3 py-1 bg-white/90 text-text-primary text-xs font-medium rounded-full mb-3">Featured</span>
-                        <h3 class="text-white text-3xl font-bold">CD Collection</h3>
-                        <p class="text-white/80 text-sm mt-1">200+ titles</p>
+            <!-- Bento Grid Layout with 3D Perspective - 5 Categories -->
+            <div class="grid grid-cols-2 grid-rows-[5fr_2fr_3fr] gap-4 h-[1100px] [perspective:1200px]">
+                <!-- CD - Top Left (Large) -->
+                <a href="{{ route('collection', ['category' => 'cd']) }}"
+                   class="group relative overflow-hidden rounded-2xl
+                          transition-all duration-500 ease-out
+                          [transform-style:preserve-3d]
+                          hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(-1deg)]
+                          shadow-lg hover:shadow-2xl hover:shadow-black/30">
+                    <img src="/images/cd-gorillaz.webp" alt="CD Collection" class="absolute inset-0 w-full h-full object-contain bg-white transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <!-- Shine effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-2 backdrop-blur-md bg-gradient-to-b from-white/10 to-white/5 border-t border-white/30
+                                shadow-[0_-4px_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                transition-transform duration-500 [transform:translateZ(20px)]">
+                        <h3 class="text-white text-lg font-semibold drop-shadow-md">CD Collection</h3>
+                        <p class="text-white/70 text-[10px]">200+ titles</p>
                     </div>
                 </a>
 
-                <!-- Vinyl - Top Right -->
-                <a href="{{ route('collection', ['category' => 'vinyl']) }}" class="group relative col-span-2 overflow-hidden rounded-xl">
-                    <img src="/images/figma/vinyl-depeche-mode.png" alt="Vinyl" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <h3 class="text-white text-xl font-bold">Vinyl Records</h3>
-                        <p class="text-white/80 text-xs mt-1">150+ records</p>
+                <!-- DVD - Top Right (Large) -->
+                <a href="{{ route('collection', ['category' => 'dvd']) }}"
+                   class="group relative overflow-hidden rounded-2xl
+                          transition-all duration-500 ease-out
+                          [transform-style:preserve-3d]
+                          hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(1deg)]
+                          shadow-lg hover:shadow-2xl hover:shadow-black/30">
+                    <img src="/images/Sade_50_R9294-7531.webp" alt="Vinyl Records" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <!-- Shine effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-2 backdrop-blur-md bg-gradient-to-b from-white/10 to-white/5 border-t border-white/30
+                                shadow-[0_-4px_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                transition-transform duration-500 [transform:translateZ(20px)]">
+                        <h3 class="text-white text-lg font-semibold drop-shadow-md">Vinyl Records</h3>
+                        <p class="text-white/70 text-[10px]">150+ records</p>
                     </div>
                 </a>
 
-                <!-- DVD - Bottom Middle -->
-                <a href="{{ route('collection', ['category' => 'dvd']) }}" class="group relative overflow-hidden rounded-xl">
-                    <img src="/images/figma/hero-paul-mccartney.png" alt="DVD" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <h3 class="text-white text-lg font-bold">DVD</h3>
-                        <p class="text-white/80 text-xs">Music films</p>
+                <!-- Accessories - Middle (Full Width, Split in 2) -->
+                <a href="{{ route('collection', ['category' => 'accessories']) }}"
+                   class="col-span-2 group relative overflow-hidden rounded-2xl
+                          transition-all duration-500 ease-out
+                          [transform-style:preserve-3d]
+                          hover:[transform:translateY(-6px)_rotateX(2deg)]
+                          shadow-lg hover:shadow-xl hover:shadow-black/25">
+                    <!-- Split images container -->
+                    <div class="absolute inset-0 flex">
+                        <div class="w-1/2 h-full overflow-hidden">
+                            <img src="/images/accessories-1.avif" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                        <div class="w-1/2 h-full overflow-hidden">
+                            <img src="/images/accessories-2.avif" alt="Accessories" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        </div>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <!-- Shine effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-2 backdrop-blur-md bg-gradient-to-b from-white/10 to-white/5 border-t border-white/30
+                                shadow-[0_-4px_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                transition-transform duration-500 [transform:translateZ(15px)]">
+                        <h3 class="text-white text-lg font-semibold drop-shadow-md">Accessories</h3>
+                        <p class="text-white/70 text-[10px]">Gear & more</p>
                     </div>
                 </a>
 
-                <!-- Accessories - Bottom Right -->
-                <a href="{{ route('collection', ['category' => 'accessories']) }}" class="group relative overflow-hidden rounded-xl">
-                    <img src="/images/figma/vinyl-product-main.png" alt="Accessories" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
-                    <div class="absolute bottom-4 left-4">
-                        <h3 class="text-white text-lg font-bold">Accessories</h3>
-                        <p class="text-white/80 text-xs">Gear & more</p>
+                <!-- Vinyl - Bottom Left (Large) -->
+                <a href="{{ route('collection', ['category' => 'vinyl']) }}"
+                   class="group relative overflow-hidden rounded-2xl
+                          transition-all duration-500 ease-out
+                          [transform-style:preserve-3d]
+                          hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(-1deg)]
+                          shadow-lg hover:shadow-2xl hover:shadow-black/30">
+                    <img src="/images/dvd-the-cure.webp" alt="DVD Collection" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <!-- Shine effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-2 backdrop-blur-md bg-gradient-to-b from-white/10 to-white/5 border-t border-white/30
+                                shadow-[0_-4px_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                transition-transform duration-500 [transform:translateZ(20px)]">
+                        <h3 class="text-white text-lg font-semibold drop-shadow-md">DVD Collection</h3>
+                        <p class="text-white/70 text-[10px]">Music films</p>
+                    </div>
+                </a>
+
+                <!-- Blue Ray - Bottom Right (Large) -->
+                <a href="{{ route('collection', ['category' => 'bluray']) }}"
+                   class="group relative overflow-hidden rounded-2xl
+                          transition-all duration-500 ease-out
+                          [transform-style:preserve-3d]
+                          hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(1deg)]
+                          shadow-lg hover:shadow-2xl hover:shadow-black/30">
+                    <img src="/images/bluray-seal.jpg" alt="Blue Ray" class="absolute inset-0 w-full h-full object-contain bg-white transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <!-- Shine effect -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 px-4 py-2 backdrop-blur-md bg-gradient-to-b from-white/10 to-white/5 border-t border-white/30
+                                shadow-[0_-4px_20px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.2)]
+                                transition-transform duration-500 [transform:translateZ(20px)]">
+                        <h3 class="text-white text-lg font-semibold drop-shadow-md">Blue Ray</h3>
+                        <p class="text-white/70 text-[10px]">HD concerts</p>
                     </div>
                 </a>
             </div>

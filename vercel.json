@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "framework": null,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.7.1"
+    }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "dest": "/build/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php"
+    }
+  ],
+  "env": {
+    "APP_NAME": "Niche",
+    "APP_ENV": "production",
+    "APP_KEY": "base64:4upLjyb5WmIdWeG8FrPpmGTHZMyTnxeK8/AfeLao1rY=",
+    "APP_DEBUG": "true",
+    "APP_URL": "https://niche-template-1.vercel.app",
+    "DB_CONNECTION": "sqlite",
+    "DB_DATABASE": "/tmp/database.sqlite",
+    "SESSION_DRIVER": "array",
+    "QUEUE_CONNECTION": "sync",
+    "CACHE_STORE": "array",
+    "LOG_CHANNEL": "stderr",
+    "VIEW_COMPILED_PATH": "/tmp/views",
+    "FILESYSTEM_DISK": "local"
+  }
+}
