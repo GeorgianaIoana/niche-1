@@ -52,7 +52,7 @@
             </a>
 
             @if(count($metaSegments))
-                <p class="mt-3 text-text-muted italic" style="font-size: 12px; letter-spacing: 0.4px;">
+                <p class="mt-3 text-text-muted" style="font-size: 12px; letter-spacing: 0.4px;">
                     {{ implode(' · ', $metaSegments) }}
                 </p>
             @endif

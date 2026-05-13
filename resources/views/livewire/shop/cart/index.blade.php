@@ -25,14 +25,14 @@
                         <p class="label-small mb-5">
                             Pending Acquisition · {{ $cart->item_count }} {{ Str::plural('Item', $cart->item_count) }} Reserved
                         </p>
-                        <h1 class="heading-display-italic">
+                        <h1 class="heading-1 font-serif">
                             Your Collection<br>
                             <span class="text-accent">in Progress.</span>
                         </h1>
                     </div>
 
                     <div class="lg:text-right lg:max-w-xs">
-                        <p class="text-text-muted italic leading-relaxed" style="font-size: 12px; letter-spacing: 0.4px;">
+                        <p class="text-text-muted leading-relaxed" style="font-size: 12px; letter-spacing: 0.4px;">
                             Hand-inspected before dispatch.<br>
                             Reserved for 60 minutes from last activity.
                         </p>
@@ -75,7 +75,7 @@
                             <p class="label-small mb-2">The Ledger</p>
                             <h2 class="heading-4">Reserved Records</h2>
                         </div>
-                        <span class="text-text-muted italic hidden md:inline" style="font-size: 12px; letter-spacing: 0.4px;">
+                        <span class="text-text-muted hidden md:inline" style="font-size: 12px; letter-spacing: 0.4px;">
                             {{ $cart->items->count() }} {{ Str::plural('entry', $cart->items->count()) }}
                         </span>
                     </div>
@@ -101,7 +101,7 @@
                             </svg>
                             Continue Browsing
                         </a>
-                        <p class="text-text-muted italic hidden md:block" style="font-size: 12px; letter-spacing: 0.4px;">
+                        <p class="text-text-muted hidden md:block" style="font-size: 12px; letter-spacing: 0.4px;">
                             Items held for 60 minutes from last activity.
                         </p>
                     </div>
@@ -115,6 +115,37 @@
                 </aside>
             </div>
         </div>
+
+        {{-- ─────────────────────────── YOU MAY ALSO LIKE ─────────────────────────── --}}
+        @if($recommendations->isNotEmpty())
+            <section class="glass-panel py-24">
+                <div class="container-page">
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+                        <div>
+                            <p class="label-small mb-3">Curated For You</p>
+                            <h2 class="heading-4">You may also like</h2>
+                        </div>
+                        <a href="{{ route('collection') }}" class="btn-ios-secondary !py-2.5 !px-5 inline-flex items-center gap-2 self-start md:self-end">
+                            View All
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="gradient-hairline mb-12"></div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 stagger-children">
+                        @foreach($recommendations as $product)
+                            <x-public.product-card
+                                :product="$product"
+                                :wire:key="'rec-'.$product->id"
+                            />
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+        @endif
     @else
         {{-- ─────────────────────────── EMPTY STATE ─────────────────────────── --}}
         <section class="container-page pt-32 pb-24">
@@ -126,14 +157,14 @@
                 </div>
 
                 <p class="label-small mb-6">The Archive Awaits</p>
-                <h1 class="heading-display-italic mb-8">
+                <h1 class="heading-1 font-serif mb-8">
                     An empty crate.<br>
                     <span class="text-accent">Yours to fill.</span>
                 </h1>
 
                 <div class="gradient-hairline mx-auto mb-8" style="width: 120px;"></div>
 
-                <p class="text-body italic leading-relaxed max-w-md mx-auto mb-10">
+                <p class="text-body leading-relaxed max-w-md mx-auto mb-10">
                     Every collection begins with a single record.
                     Begin yours with something worth keeping.
                 </p>

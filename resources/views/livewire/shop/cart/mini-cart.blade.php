@@ -1,11 +1,12 @@
 <div x-data="{ open: $wire.entangle('open') }" @keydown.escape.window="open = false">
     <!-- Cart Button -->
     <div
-        class="w-9 h-9 rounded-full flex items-center justify-center glass-subtle hover:glass-card transition-all duration-300"
+        class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-alt/80 hover:bg-surface transition-all duration-300"
+        style="box-shadow: inset 1px 1px 3px rgba(0,0,0,0.05), inset -1px -1px 3px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.06);"
     >
         <button
             @click="open = true"
-            class="relative text-current"
+            class="relative text-text-secondary hover:text-text-primary transition-colors"
         >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />

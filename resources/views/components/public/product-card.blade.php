@@ -27,13 +27,20 @@
 
 <article class="product-card-3d border-glow group">
     <!-- Image Container - glass with rounded corners -->
-    <a href="{{ route('products.show', $product) }}" class="product-image block">
-        <img
-            src="{{ $imageUrl }}"
-            alt="{{ $product->title }} by {{ $product->artist }}"
-            class="w-full aspect-square object-cover"
-        >
-    </a>
+    <div class="relative">
+        <livewire:shop.favorites.toggle
+            :product="$product"
+            variant="icon"
+            :wire:key="'fav-'.$product->id"
+        />
+        <a href="{{ route('products.show', $product) }}" class="product-image block">
+            <img
+                src="{{ $imageUrl }}"
+                alt="{{ $product->title }} by {{ $product->artist }}"
+                class="w-full aspect-square object-cover"
+            >
+        </a>
+    </div>
 
     <!-- Info - clean typography, good spacing -->
     <div class="pt-4 pb-2 px-1 space-y-2">

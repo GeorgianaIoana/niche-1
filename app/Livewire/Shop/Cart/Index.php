@@ -65,18 +65,30 @@ class Index extends Component
 
     protected function loadRecommendations(): Collection
     {
-        if ($this->cart->items->isNotEmpty()) {
-            return collect();
-        }
+        // Exclude products already in cart
+        $excludeIds = $this->cart->items->pluck('product_id')->toArray();
 
-        $picks = Product::inStock()->newArrivals()->latest()->take(4)->get();
+        $picks = Product::inStock()
+            ->whereNotIn('id', $excludeIds)
+            ->newArrivals()
+            ->latest()
+            ->take(4)
+            ->get();
 
         if ($picks->count() < 4) {
-            $picks = Product::inStock()->featured()->take(4)->get();
+            $picks = Product::inStock()
+                ->whereNotIn('id', $excludeIds)
+                ->featured()
+                ->take(4)
+                ->get();
         }
 
         if ($picks->count() < 4) {
-            $picks = Product::inStock()->latest()->take(4)->get();
+            $picks = Product::inStock()
+                ->whereNotIn('id', $excludeIds)
+                ->latest()
+                ->take(4)
+                ->get();
         }
 
         return $picks;

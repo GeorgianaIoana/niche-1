@@ -27,7 +27,7 @@
                 Complimentary shipping unlocked
             </div>
         @else
-            <p class="text-text-muted italic" style="font-size: 12px; letter-spacing: 0.4px;">
+            <p class="text-text-muted" style="font-size: 12px; letter-spacing: 0.4px;">
                 Complimentary shipping on orders over ${{ number_format(config('themes.cart.free_shipping_threshold', 150), 0) }}.
             </p>
         @endif
@@ -92,7 +92,7 @@
             </span>
         </div>
 
-        <p class="text-center text-text-muted italic mt-6 leading-relaxed" style="font-size: 11px; letter-spacing: 0.3px;">
+        <p class="text-center text-text-muted mt-6 leading-relaxed" style="font-size: 11px; letter-spacing: 0.3px;">
             Hand-packed by The Curated Archive.<br>
             Insured &amp; tracked dispatch worldwide.
         </p>
