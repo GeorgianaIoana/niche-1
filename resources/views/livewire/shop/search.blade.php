@@ -84,8 +84,20 @@
             </div>
 
             <!-- Results List -->
+            @php
+                $figmaImages = [
+                    '/images/figma/cd-laura-pausini.png',
+                    '/images/figma/vinyl-bruno-mars.png',
+                    '/images/figma/cd-joy-redvelvet.png',
+                    '/images/figma/vinyl-gorillaz.png',
+                ];
+            @endphp
             <div class="max-h-80 overflow-y-auto">
                 @foreach($results as $product)
+                    @php
+                        $fallbackImage = $figmaImages[$product->id % count($figmaImages)];
+                        $imageUrl = $product->image ?: $fallbackImage;
+                    @endphp
                     <button
                         wire:click="selectProduct('{{ $product->slug }}')"
                         class="w-full flex items-center gap-4 p-4 hover:bg-surface-alt/50 transition-all text-left group border-b border-border/50 last:border-b-0"
@@ -95,15 +107,7 @@
                             class="w-14 h-14 rounded-xl flex-shrink-0 overflow-hidden"
                             style="box-shadow: 0 4px 12px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.3);"
                         >
-                            @if($product->image)
-                                <img src="{{ $product->image }}" alt="{{ $product->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                            @else
-                                <div class="w-full h-full flex items-center justify-center bg-surface-card">
-                                    <svg class="w-6 h-6 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-                                    </svg>
-                                </div>
-                            @endif
+                            <img src="{{ $imageUrl }}" alt="{{ $product->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                         </div>
 
                         <!-- Product Info -->

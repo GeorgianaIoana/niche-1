@@ -8,6 +8,15 @@
         $product->year,
     ]);
     $lineTotal = '$' . number_format($product->price * $item->quantity, 2);
+
+    $figmaImages = [
+        '/images/figma/cd-laura-pausini.png',
+        '/images/figma/vinyl-bruno-mars.png',
+        '/images/figma/cd-joy-redvelvet.png',
+        '/images/figma/vinyl-gorillaz.png',
+    ];
+    $fallbackImage = $figmaImages[$product->id % count($figmaImages)];
+    $imageUrl = $product->image ?: $fallbackImage;
 @endphp
 
 <div class="glass-card p-5 md:p-6 mb-4 group hover:scale-[1.01] transition-all duration-300">
@@ -25,19 +34,11 @@
             class="col-span-3 md:col-span-2 flex-shrink-0"
         >
             <div class="aspect-square overflow-hidden rounded-xl shadow-md">
-                @if($product->image)
-                    <img
-                        src="{{ $product->image }}"
-                        alt="{{ $product->title }}"
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                @else
-                    <div class="w-full h-full bg-surface-card flex items-center justify-center">
-                        <div class="w-14 h-14 rounded-full bg-surface-dark flex items-center justify-center">
-                            <div class="w-5 h-5 rounded-full bg-accent"></div>
-                        </div>
-                    </div>
-                @endif
+                <img
+                    src="{{ $imageUrl }}"
+                    alt="{{ $product->title }}"
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                >
             </div>
         </a>
 
@@ -53,6 +54,19 @@
             @if(count($metaSegments))
                 <p class="mt-3 text-text-muted italic" style="font-size: 12px; letter-spacing: 0.4px;">
                     {{ implode(' · ', $metaSegments) }}
+                </p>
+            @endif
+
+            <!-- Stock Status -->
+            @if($product->stock <= 5 && $product->stock > 0)
+                <p class="mt-2 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                    <span class="text-xs text-amber-600 dark:text-amber-400">Doar {{ $product->stock }} în stoc</span>
+                </p>
+            @elseif($product->stock == 0)
+                <p class="mt-2 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                    <span class="text-xs text-red-600 dark:text-red-400">Stoc epuizat</span>
                 </p>
             @endif
 
@@ -90,17 +104,30 @@
 
                 <div class="flex flex-col items-end gap-3">
                     <span class="text-xl font-bold text-accent">{{ $lineTotal }}</span>
-                    <button
-                        type="button"
-                        wire:click="removeItem({{ $item->id }})"
-                        class="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-text-muted hover:text-red-500 transition-colors"
-                        aria-label="Remove {{ $product->title }}"
-                    >
-                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                        Remove
-                    </button>
+                    <div class="flex items-center gap-4">
+                        <button
+                            type="button"
+                            wire:click="moveToFavorites({{ $item->id }})"
+                            class="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-text-muted hover:text-accent transition-colors"
+                            title="Save for later"
+                        >
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            Save
+                        </button>
+                        <button
+                            type="button"
+                            wire:click="removeItem({{ $item->id }})"
+                            class="inline-flex items-center gap-2 text-xs uppercase tracking-wider text-text-muted hover:text-red-500 transition-colors"
+                            aria-label="Remove {{ $product->title }}"
+                        >
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Remove
+                        </button>
+                    </div>
                 </div>
             </div>
         @else

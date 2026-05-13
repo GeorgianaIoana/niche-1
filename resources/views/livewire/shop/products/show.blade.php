@@ -1,4 +1,31 @@
 <div>
+    <!-- Breadcrumbs -->
+    <nav class="container-page pt-6 pb-2">
+        <ol class="flex items-center gap-2 text-sm">
+            <li>
+                <a href="{{ route('home') }}" class="text-text-secondary hover:text-accent transition-colors">
+                    Home
+                </a>
+            </li>
+            <li class="text-text-muted">/</li>
+            <li>
+                <a href="{{ route('collection') }}" class="text-text-secondary hover:text-accent transition-colors">
+                    Collection
+                </a>
+            </li>
+            @if($product->category)
+            <li class="text-text-muted">/</li>
+            <li>
+                <a href="{{ route('collection', ['category' => $product->category->slug]) }}" class="text-text-secondary hover:text-accent transition-colors">
+                    {{ $product->category->name }}
+                </a>
+            </li>
+            @endif
+            <li class="text-text-muted">/</li>
+            <li class="text-text-primary font-medium truncate max-w-[200px]">{{ $product->title }}</li>
+        </ol>
+    </nav>
+
     <!-- Product Detail -->
     <section class="container-page py-16">
         <div class="grid lg:grid-cols-2 gap-16">
@@ -7,20 +34,24 @@
                 <!-- Main Image - Glass elevated card -->
                 <div class="relative animate-fade-in-up">
                     <div class="glass-card-elevated p-4 md:p-6">
+                        @php
+                            $figmaImages = [
+                                '/images/figma/cd-laura-pausini.png',
+                                '/images/figma/cd-lorde.png',
+                                '/images/figma/vinyl-bruno-mars.png',
+                                '/images/figma/vinyl-gorillaz.png',
+                                '/images/figma/cd-joy-redvelvet.png',
+                                '/images/figma/vinyl-jazz-closeup.png',
+                            ];
+                            $fallbackImage = $figmaImages[$product->id % count($figmaImages)];
+                            $imageUrl = $product->image ?: $fallbackImage;
+                        @endphp
                         <div class="aspect-square rounded-2xl overflow-hidden">
-                            @if($product->image)
-                                <img
-                                    src="{{ $product->image }}"
-                                    alt="{{ $product->title }}"
-                                    class="w-full h-full object-cover"
-                                >
-                            @else
-                                <img
-                                    src="/images/figma/vinyl-product-main.png"
-                                    alt="{{ $product->title }}"
-                                    class="w-full h-full object-cover"
-                                >
-                            @endif
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="{{ $product->title }}"
+                                class="w-full h-full object-cover"
+                            >
                         </div>
                     </div>
 
@@ -90,6 +121,20 @@
                     <p class="text-sm text-text-secondary">Includes Archival Grading + Insured Shipping</p>
                 </div>
 
+                <!-- Stock Indicator -->
+                <div class="flex items-center gap-2 mb-6 animate-fade-in-up" style="animation-delay: 0.27s;">
+                    @if($product->stock > 5)
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="text-sm text-green-600 dark:text-green-400">În stoc</span>
+                    @elseif($product->stock > 0)
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span class="text-sm text-amber-600 dark:text-amber-400">Ultimele {{ $product->stock }} bucăți</span>
+                    @else
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        <span class="text-sm text-red-600 dark:text-red-400">Stoc epuizat</span>
+                    @endif
+                </div>
+
                 <!-- Buttons -->
                 <div class="space-y-4 mb-12 animate-fade-in-up" style="animation-delay: 0.3s;">
                     @if($product->stock > 0)
@@ -109,6 +154,70 @@
                         </button>
                         @livewire('shop.favorites.toggle', ['product' => $product, 'variant' => 'button'], key('fav-toggle-show-oos-'.$product->id))
                     @endif
+                </div>
+
+                <!-- Shipping Info -->
+                <div class="glass-subtle p-4 rounded-xl mb-8 animate-fade-in-up" style="animation-delay: 0.32s;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                        <span class="text-sm font-medium text-text-primary">Livrare & Retururi</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-text-secondary">
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Livrare gratuită peste €100
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Expediere în 1-2 zile lucrătoare
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Retur gratuit în 14 zile
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Social Share -->
+                <div class="flex items-center gap-4 mb-8 animate-fade-in-up" style="animation-delay: 0.35s;">
+                    <span class="text-sm text-text-secondary">Share:</span>
+                    <div class="flex items-center gap-2">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}"
+                           target="_blank" rel="noopener"
+                           class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-text-secondary hover:text-accent hover:scale-110 transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->url()) }}&text={{ urlencode($product->title . ' - ' . $product->artist) }}"
+                           target="_blank" rel="noopener"
+                           class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-text-secondary hover:text-accent hover:scale-110 transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(request()->url()) }}&media={{ urlencode($product->image ?? '') }}&description={{ urlencode($product->title) }}"
+                           target="_blank" rel="noopener"
+                           class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-text-secondary hover:text-accent hover:scale-110 transition-all">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <button onclick="navigator.clipboard.writeText('{{ request()->url() }}'); alert('Link copiat!')"
+                                class="w-9 h-9 rounded-full glass-subtle flex items-center justify-center text-text-secondary hover:text-accent hover:scale-110 transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Tracklist -->

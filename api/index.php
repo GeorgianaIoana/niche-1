@@ -3,6 +3,10 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
+// Display all errors for debugging
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 define('LARAVEL_START', microtime(true));
 
 // Create necessary directories in /tmp for Vercel

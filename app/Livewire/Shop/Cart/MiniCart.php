@@ -23,6 +23,7 @@ class MiniCart extends Component
     public function refreshCart(GetCartAction $getCart): void
     {
         $this->cart = $getCart->execute();
+        $this->open = true; // Auto-open drawer when cart is updated
     }
 
     public function toggle(): void

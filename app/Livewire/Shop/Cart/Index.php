@@ -5,6 +5,7 @@ namespace App\Livewire\Shop\Cart;
 use App\Actions\Cart\GetCartAction;
 use App\Actions\Cart\RemoveFromCartAction;
 use App\Actions\Cart\UpdateCartAction;
+use App\Actions\Favorites\ToggleFavoriteAction;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -46,6 +47,19 @@ class Index extends Component
             $this->cart = $this->cart->fresh('items.product');
             $this->recommendations = $this->loadRecommendations();
             $this->dispatch('cart-updated');
+        }
+    }
+
+    public function moveToFavorites(int $itemId, ToggleFavoriteAction $toggleFavorite, RemoveFromCartAction $removeFromCart): void
+    {
+        $cartItem = CartItem::find($itemId);
+        if ($cartItem && $cartItem->cart_id === $this->cart->id) {
+            $toggleFavorite->execute($cartItem->product);
+            $removeFromCart->execute($cartItem);
+            $this->cart = $this->cart->fresh('items.product');
+            $this->recommendations = $this->loadRecommendations();
+            $this->dispatch('cart-updated');
+            $this->dispatch('favorites-updated');
         }
     }
 

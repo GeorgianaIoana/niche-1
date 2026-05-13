@@ -171,8 +171,7 @@
             @endphp
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($featuredProducts as $index => $product)
-                <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2"
-                     style="box-shadow: 0 4px 20px rgba(0,0,0,0.06); hover:box-shadow: 0 20px 40px rgba(0,0,0,0.12);">
+                <div class="group relative bg-surface rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 border border-border shadow-lg">
                     <!-- Image -->
                     <div class="relative overflow-hidden bg-surface-alt">
                         <a href="{{ route('products.show', $product) }}" class="block">
@@ -212,7 +211,7 @@
     @endif
 
     <!-- Categories Section - Bento Grid -->
-    <section class="py-16 bg-[#fafaf8] dark:bg-surface">
+    <section class="py-16 bg-surface-alt">
         <div class="container-page">
             <!-- Section Header -->
             <div class="mb-10">
@@ -228,7 +227,7 @@
                           [transform-style:preserve-3d]
                           hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(-1deg)]
                           shadow-lg hover:shadow-2xl hover:shadow-black/30">
-                    <img src="/images/cd-gorillaz.webp" alt="CD Collection" class="absolute inset-0 w-full h-full object-contain bg-white transition-transform duration-700 group-hover:scale-105">
+                    <img src="/images/cd-gorillaz.webp" alt="CD Collection" class="absolute inset-0 w-full h-full object-contain bg-surface transition-transform duration-700 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                     <!-- Shine effect -->
                     <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -312,7 +311,7 @@
                           [transform-style:preserve-3d]
                           hover:[transform:translateY(-8px)_rotateX(2deg)_rotateY(1deg)]
                           shadow-lg hover:shadow-2xl hover:shadow-black/30">
-                    <img src="/images/bluray-seal.jpg" alt="Blue Ray" class="absolute inset-0 w-full h-full object-contain bg-white transition-transform duration-700 group-hover:scale-105">
+                    <img src="/images/bluray-seal.jpg" alt="Blue Ray" class="absolute inset-0 w-full h-full object-contain bg-surface transition-transform duration-700 group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                     <!-- Shine effect -->
                     <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -356,8 +355,7 @@
             @endphp
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($newArrivals as $index => $product)
-                <div class="group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2"
-                     style="box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+                <div class="group relative bg-surface rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 border border-border shadow-lg">
                     <!-- Image -->
                     <div class="relative overflow-hidden bg-surface-alt">
                         <a href="{{ route('products.show', $product) }}" class="block">

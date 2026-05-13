@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* Configure dark mode to use [data-theme="dark"] selector instead of @media (prefers-color-scheme: dark) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -18,15 +21,15 @@
     --color-surface-card: #e4e2dd;
     --color-surface-dark: #292a2e;
 
-    /* Glass Effect Colors */
-    --color-surface-glass: rgba(255, 255, 255, 0.65);
-    --color-surface-glass-elevated: rgba(255, 255, 255, 0.75);
-    --color-surface-glass-subtle: rgba(255, 255, 255, 0.45);
+    /* Glass Effect Colors (Light Mode - need visible contrast) */
+    --color-surface-glass: rgba(255, 255, 255, 0.85);
+    --color-surface-glass-elevated: rgba(255, 255, 255, 0.92);
+    --color-surface-glass-subtle: rgba(255, 255, 255, 0.75);
 
     /* Text Colors */
     --color-text-primary: #292a2e;
     --color-text-secondary: #5e5e63;
-    --color-text-muted: rgba(208, 197, 181, 0.6);
+    --color-text-muted: #8a8a8f;
 
     /* Accent Colors */
     --color-accent: #745b25;
@@ -40,7 +43,7 @@
     /* Border Colors */
     --color-border: rgba(208, 197, 181, 0.15);
     --color-border-accent: rgba(116, 91, 37, 0.3);
-    --color-border-glass: rgba(255, 255, 255, 0.18);
+    --color-border-glass: rgba(0, 0, 0, 0.08);
 
     /* Hero Blue Gradient */
     --color-hero-blue-start: #4a7c9b;
@@ -620,6 +623,53 @@
         -webkit-backdrop-filter: blur(12px) saturate(150%);
         border: 1px solid var(--color-border-glass);
         border-radius: 16px;
+    }
+
+    /* Light Mode Glass Enhancements - Better contrast and depth */
+    [data-theme="light"] .glass-card,
+    [data-theme="light"] .glass-card-elevated {
+        box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.06),
+            0 1px 4px rgba(0, 0, 0, 0.04),
+            0 0 0 1px rgba(0, 0, 0, 0.03);
+    }
+
+    [data-theme="light"] .glass-card:hover,
+    [data-theme="light"] .glass-card-elevated:hover {
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            0 2px 8px rgba(0, 0, 0, 0.06),
+            0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .glass-subtle {
+        box-shadow:
+            0 2px 12px rgba(0, 0, 0, 0.04),
+            0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root:not([data-theme="dark"]) .glass-card,
+        :root:not([data-theme="dark"]) .glass-card-elevated {
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.06),
+                0 1px 4px rgba(0, 0, 0, 0.04),
+                0 0 0 1px rgba(0, 0, 0, 0.03);
+        }
+
+        :root:not([data-theme="dark"]) .glass-card:hover,
+        :root:not([data-theme="dark"]) .glass-card-elevated:hover {
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.06),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
+        }
+
+        :root:not([data-theme="dark"]) .glass-subtle {
+            box-shadow:
+                0 2px 12px rgba(0, 0, 0, 0.04),
+                0 1px 3px rgba(0, 0, 0, 0.03);
+        }
     }
 
     /* Glass Panel (full-width sections) */

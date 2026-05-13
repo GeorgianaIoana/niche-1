@@ -1,5 +1,15 @@
 <div>
     @if($cart->items->count())
+        <!-- Breadcrumbs -->
+        <nav class="container-page pt-6 pb-2">
+            <ol class="flex items-center gap-2 text-sm">
+                <li>
+                    <a href="{{ route('home') }}" class="text-text-secondary hover:text-accent transition-colors">Home</a>
+                </li>
+                <li class="text-text-muted">/</li>
+                <li class="text-text-primary font-medium">Cart</li>
+            </ol>
+        </nav>
         @php
             $threshold = (float) config('themes.cart.free_shipping_threshold', 150);
             $subtotal = (float) $cart->subtotal;
