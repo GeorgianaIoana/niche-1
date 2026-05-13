@@ -108,7 +108,7 @@
                     <div class="p-6 border-t border-border-glass space-y-4">
                         <div class="flex items-center justify-between">
                             <span class="text-sm uppercase tracking-wider text-text-secondary">Subtotal</span>
-                            <span class="text-2xl font-serif font-bold text-accent">{{ $cart->formatted_subtotal }}</span>
+                            <span class="text-2xl font-bold text-accent">{{ $cart->formatted_subtotal }}</span>
                         </div>
                         <a
                             href="{{ route('cart') }}"

@@ -187,7 +187,7 @@
                             <span class="absolute top-4 left-4 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wider bg-gradient-to-r from-accent to-accent-light text-white rounded-full shadow-sm">New</span>
                         @endif
                         <!-- Quick View Overlay -->
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
                     </div>
 
                     <!-- Info -->
@@ -368,7 +368,7 @@
                         <!-- Favorite Toggle -->
                         @livewire('shop.favorites.toggle', ['product' => $product, 'variant' => 'icon'], key('fav-home-best-'.$product->id))
                         <!-- Quick View Overlay -->
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 pointer-events-none"></div>
                     </div>
 
                     <!-- Info -->

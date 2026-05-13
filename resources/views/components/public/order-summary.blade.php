@@ -59,7 +59,7 @@
     <div class="border-t border-border-glass pt-6 mb-8">
         <div class="flex items-baseline justify-between">
             <span class="label-small" style="color: var(--color-text-primary); letter-spacing: 2.8px;">Total Due</span>
-            <span class="text-3xl font-serif font-bold text-accent">{{ $cart->formatted_total }}</span>
+            <span class="text-3xl font-bold text-accent">{{ $cart->formatted_total }}</span>
         </div>
     </div>
 

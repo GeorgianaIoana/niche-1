@@ -118,24 +118,22 @@
 
         {{-- ─────────────────────────── YOU MAY ALSO LIKE ─────────────────────────── --}}
         @if($recommendations->isNotEmpty())
-            <section class="glass-panel py-24">
+            <section class="py-20 md:py-28 bg-gradient-to-b from-surface to-surface-alt">
                 <div class="container-page">
-                    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
                         <div>
-                            <p class="label-small mb-3">Curated For You</p>
-                            <h2 class="heading-4">You may also like</h2>
+                            <span class="text-accent text-xs font-medium tracking-widest uppercase mb-2 block">Curated For You</span>
+                            <h2 class="text-3xl md:text-4xl font-serif font-semibold text-text-primary">You may also like</h2>
                         </div>
-                        <a href="{{ route('collection') }}" class="btn-ios-secondary !py-2.5 !px-5 inline-flex items-center gap-2 self-start md:self-end">
+                        <a href="{{ route('collection') }}" class="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full border-2 border-text-primary/20 text-text-primary text-xs font-medium tracking-wide hover:border-accent hover:text-accent transition-all duration-300">
                             View All
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                             </svg>
                         </a>
                     </div>
 
-                    <div class="gradient-hairline mb-12"></div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8 stagger-children">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                         @foreach($recommendations as $product)
                             <x-public.product-card
                                 :product="$product"
