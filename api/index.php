@@ -22,9 +22,15 @@ foreach ($directories as $dir) {
     }
 }
 
-// Create empty SQLite database if it doesn't exist
+// Copy pre-seeded SQLite database if it doesn't exist in /tmp
 if (!file_exists('/tmp/database.sqlite')) {
-    touch('/tmp/database.sqlite');
+    $sourceDb = __DIR__ . '/../database/database.sqlite';
+    if (file_exists($sourceDb)) {
+        copy($sourceDb, '/tmp/database.sqlite');
+    } else {
+        // Fallback: create empty database (will need migrations)
+        touch('/tmp/database.sqlite');
+    }
 }
 
 // Register the Composer autoloader...
