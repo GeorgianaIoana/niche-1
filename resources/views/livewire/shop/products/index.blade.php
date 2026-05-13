@@ -1,4 +1,15 @@
 <div x-data="{ filtersOpen: false }" class="container-page py-10 lg:py-14">
+    <style>
+        .filter-sidebar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        [data-theme="dark"] .filter-sidebar {
+            background: rgba(40, 40, 45, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
     {{-- Breadcrumb --}}
     <x-public.breadcrumbs :items="[['label' => 'Collection']]" />
 
@@ -101,6 +112,28 @@
                     </button>
                 @endforeach
 
+                @foreach($selectedArtists as $artist)
+                    <button
+                        type="button"
+                        wire:click="removeArtist('{{ $artist }}')"
+                        class="glass-subtle inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-full text-text-primary hover:bg-surface-card/80 transition-colors"
+                    >
+                        <span>Artist: <span class="font-medium">{{ $artist }}</span></span>
+                        <span aria-hidden="true">×</span>
+                    </button>
+                @endforeach
+
+                @foreach($selectedLabels as $label)
+                    <button
+                        type="button"
+                        wire:click="removeLabel('{{ $label }}')"
+                        class="glass-subtle inline-flex items-center gap-2 px-3 py-1.5 text-xs rounded-full text-text-primary hover:bg-surface-card/80 transition-colors"
+                    >
+                        <span>Label: <span class="font-medium">{{ $label }}</span></span>
+                        <span aria-hidden="true">×</span>
+                    </button>
+                @endforeach
+
                 <button
                     type="button"
                     wire:click="clearFilters"
@@ -115,10 +148,12 @@
     {{-- Main layout --}}
     <div class="flex gap-10">
         {{-- Sidebar — desktop --}}
-        <aside class="w-60 flex-shrink-0 hidden lg:block">
-            <div class="glass-card p-6 sticky top-24">
+        <aside class="w-64 flex-shrink-0 hidden lg:block">
+            <div class="filter-sidebar p-6 rounded-2xl sticky top-24">
                 @include('livewire.shop.products._filter-sections', [
                     'categories' => $categories,
+                    'artists' => $artists,
+                    'labels' => $labels,
                 ])
             </div>
         </aside>
@@ -198,6 +233,8 @@
             <div class="flex-1 overflow-y-auto px-6 py-6">
                 @include('livewire.shop.products._filter-sections', [
                     'categories' => $categories,
+                    'artists' => $artists,
+                    'labels' => $labels,
                 ])
             </div>
         </aside>
